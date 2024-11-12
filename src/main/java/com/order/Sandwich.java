@@ -32,6 +32,26 @@ public class Sandwich {
             this. cheesePrice = cheesePrice;
             this.extraCheesePrice = extraCheesePrice;
         }
+
+        public double getBasePrice() {
+            return basePrice;
+        }
+
+        public double getCheesePrice() {
+            return cheesePrice;
+        }
+
+        public double getExtraCheesePrice() {
+            return extraCheesePrice;
+        }
+
+        public double getExtraMeatPrice() {
+            return extraMeatPrice;
+        }
+
+        public double getMeatPrice() {
+            return meatPrice;
+        }
     }
     enum BreadType{
         WHITE, WHEAT, RYE, WRAP
@@ -54,7 +74,7 @@ public class Sandwich {
 
     }
 
-
+    public
 
 
 
