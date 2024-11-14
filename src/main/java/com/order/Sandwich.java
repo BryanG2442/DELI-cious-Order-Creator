@@ -12,11 +12,11 @@ public class Sandwich {
         TWELVE_INCH(8.50, 3, 1.50, 2.25, .90);
 
 
-        private double basePrice;
-        private double meatPrice;
-        private double extraMeatPrice;
-        private double cheesePrice;
-        private double extraCheesePrice;
+        private final double basePrice;
+        private final double meatPrice;
+        private final double extraMeatPrice;
+        private final double cheesePrice;
+        private final double extraCheesePrice;
 
         BreadSize (double basePrice, double meatPrice, double extraMeatPrice, double cheesePrice, double extraCheesePrice){
             this.basePrice = basePrice;
