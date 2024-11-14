@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Sandwich {
 
-    enum BreadSize {
+    public enum BreadSize {
         FOUR_INCH(5.50, 1, .50, .75, .30),
 
         EIGHT_INCH(7, 2, 1, 1.50, .60),
@@ -46,20 +46,20 @@ public class Sandwich {
             return meatPrice;
         }
     }
-    enum BreadType{
+    public enum BreadType{
         WHITE, WHEAT, RYE, WRAP
     }
 
-    enum RegularToppings{
+    public enum RegularToppings{
         LETTUCE, PEPPERS, ONIONS, TOMATOES, JALAPENOS, CUCUMBERS, PICKLES, GUACAMOLE, MUSHROOMS
     }
-    enum PremiumMeats{
+    public enum PremiumMeats{
         STEAK, HAM, SALAMI, ROAST_BEEF, CHICKEN, BACON
     }
-    enum PremiumCheese{
+    public enum PremiumCheese{
         AMERICAN, PROVOLONE, CHEDDAR, SWISS
     }
-    enum Sauces {
+    public enum Sauces {
      MAYO, MUSTARD, KETCHUP, RANCH, THOUSAND_ISLANDS, VINAIGRETTE
     }
 
@@ -144,12 +144,47 @@ public class Sandwich {
     }
 
 
+    public boolean isToasted() {
+        return isToasted;
+    }
 
+    public void setToasted(boolean toasted) {
+        isToasted = toasted;
+    }
 
+    public void setBreadType(BreadType breadType) {
+        this.breadType = breadType;
+    }
 
+    public void setBreadSize(BreadSize breadSize) {
+        this.breadSize = breadSize;
+    }
 
+    public void setMeatToppings(ArrayList<PremiumMeats> meatToppings) {
+        this.meatToppings = meatToppings;
+    }
 
+    public void setExtraMeatToppings(ArrayList<PremiumMeats> extraMeatToppings) {
+        this.extraMeatToppings = extraMeatToppings;
+    }
 
+    public void setCheeseToppings(ArrayList<PremiumCheese> cheeseToppings) {
+        this.cheeseToppings = cheeseToppings;
+    }
 
+    public void setExtraCheeseToppings(ArrayList<PremiumCheese> extraCheeseToppings) {
+        this.extraCheeseToppings = extraCheeseToppings;
+    }
 
+    public void setRegularToppings(ArrayList<RegularToppings> regularToppings) {
+        this.regularToppings = regularToppings;
+    }
+
+    public void setExtraRegularToppings(ArrayList<RegularToppings> extraRegularToppings) {
+        this.extraRegularToppings = extraRegularToppings;
+    }
+
+    public void setSauces(ArrayList<Sauces> sauces) {
+        this.sauces = sauces;
+    }
 }
