@@ -21,7 +21,10 @@ public class Order {
         }
     }
     public enum DrinkFlavors{
-        COLA("Cola"), LEMON_LIME("Lemon-Lime"), GRAPE("Grape"), STRAWBERRY("Strawberry"),
+        COLA("Cola"),
+        LEMON_LIME("Lemon-Lime"),
+        GRAPE("Grape"),
+        STRAWBERRY("Strawberry"),
         ORANGE("Orange"), NO_DRINK(" ");
         public final String readable;
         DrinkFlavors(String readable){
@@ -33,14 +36,20 @@ public class Order {
 
     public enum ChipFlavors{
         NO_CHIPS("No chips", 0),
-        STANDARD("Standard", 1.50), SPICY("Spicy", 1.50), NACHO_CHEESE("Nacho Cheese", 1.50),
+        STANDARD("Standard", 1.50), SPICY("Spicy", 1.50),
+        NACHO_CHEESE("Nacho Cheese", 1.50),
         LIME("Lime", 1.50), BBQ("BBQ", 1.50);
 
         public final String readable;
-        public final double price;
+        private final double price;
         ChipFlavors(String readable, double price){
             this.readable = readable;
             this.price = price;
+
+        }
+
+        public double getPrice() {
+            return price;
         }
     }
 
@@ -60,10 +69,48 @@ public class Order {
         this.sandwiches = sandwiches;
     }
 
+    public double getOrderPrice(){
+        return drinkSize.getDrinkPrice() + chipFlavors.getPrice() +
+                sandwiches.stream().map(sandwich -> sandwich.getSandwichPrice())
+                        .reduce(0.0, (sum, price) -> sum += price);
+    }
 
 
 
 
 
 
+
+
+    public DrinkSize getDrinkSize() {
+        return drinkSize;
+    }
+
+    public void setDrinkSize(DrinkSize drinkSize) {
+        this.drinkSize = drinkSize;
+    }
+
+    public DrinkFlavors getDrinkFlavors() {
+        return drinkFlavors;
+    }
+
+    public void setDrinkFlavors(DrinkFlavors drinkFlavors) {
+        this.drinkFlavors = drinkFlavors;
+    }
+
+    public ChipFlavors getChipFlavors() {
+        return chipFlavors;
+    }
+
+    public void setChipFlavors(ChipFlavors chipFlavors) {
+        this.chipFlavors = chipFlavors;
+    }
+
+    public ArrayList<Sandwich> getSandwiches() {
+        return sandwiches;
+    }
+
+    public void setSandwiches(ArrayList<Sandwich> sandwiches) {
+        this.sandwiches = sandwiches;
+    }
 }

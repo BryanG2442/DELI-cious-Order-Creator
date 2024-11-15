@@ -6,29 +6,198 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class UI {
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
 
     public void greetingScreen(){
-        System.out.println("Welcome to the DELI-cious application.\n" +
+        String choice = " ";
+        System.out.println("Welcome to the DELI-cious application.");
+        while (!choice.equalsIgnoreCase("0")){
+        System.out.println(
                 "Please input the number of your selection: " +
-                "\n1) Make a new order");
+                "\n1) Make a new order" +
+                "\n0) Exit");
+        choice = scanner.nextLine();
+        switch (choice){
+            case "1":
+                orderTaker();
+                break;
+            case "0":
+                System.out.println("Thank you for using this application.");
+                break;
+            default:
+                System.out.println("Invalid input. Please make a valid selection.");
+        }
+
+
+
+        }
+
     }
 
     public void orderTaker(){
         System.out.println("Welcome to the order creator. We will now take your order.");
-
-        String choice = "Y";
-        while (choice.equalsIgnoreCase("Y")){
-            ArrayList<Sandwich> sandwiches = new ArrayList<>();
-            sandwiches.add(makeSandwich());
-            System.out.println("Would you like to make another sandwich?" +
-                    "\nPlease input \"Y\" for yes, or any other key for no.");
-            choice = scanner.nextLine();
+        Order order = makeOrder();
+        System.out.println("Your order consists of: ");
+        for (Sandwich sandwich : order.getSandwiches()){
+            showSandwich(sandwich);
+        }
+        System.out.println("Drink Size ----- " + order.getDrinkSize());
+        System.out.println("Drink Flavor ----- " + order.getDrinkFlavors());
+        System.out.println("Chips ----- " + order.getChipFlavors());
+        System.out.printf("Your total comes out to %.2f. Would you like to confirm your purchase?" +
+                "\n(Y to confirm your purchase, any other key to cancel)", order.getOrderPrice());
+        String choice = scanner.nextLine();
+        if (choice.equalsIgnoreCase("Y")){
+            System.out.println("Thank you for your purchase!");
+            ReceiptWriter receiptWriter = new ReceiptWriter();
+            receiptWriter.writeReceipt(order);
+        }
+        else{
+            System.out.println("Order canceled. We hope to see you again.");
         }
 
 
+
+
+
     }
+
+    public Order makeOrder(){
+        String choice = "Y";
+        ArrayList<Sandwich> sandwiches = new ArrayList<>();
+
+        while (choice.equalsIgnoreCase("Y")){
+            sandwiches.add(makeSandwich());
+            System.out.println("Would you like to make another sandwich?" +
+                    "\nPlease input Y for yes, or any other key for no.");
+            choice = scanner.nextLine();
+        }
+
+        System.out.println("Would you like a drink? (Y for yes, any other key for no)");
+        choice = scanner.nextLine();
+        Order.DrinkSize drinkSize;
+        Order.DrinkFlavors drinkFlavor;
+        if (choice.equalsIgnoreCase("Y")){
+            drinkSize = getDrinkSize();
+            drinkFlavor = getDrinkFlavor();
+        }
+        else {
+            drinkSize = Order.DrinkSize.NO_DRINK;
+            drinkFlavor = Order.DrinkFlavors.NO_DRINK;
+        }
+        Order.ChipFlavors chipFlavor;
+        System.out.println("Would you like chips? (Y for yes, any other key for no)");
+        choice = scanner.nextLine();
+        if (choice.equalsIgnoreCase("Y")){
+            chipFlavor = getChipFlavor();
+        }
+        else {
+            chipFlavor = Order.ChipFlavors.NO_CHIPS;
+        }
+        Order order = new Order(drinkSize, drinkFlavor, chipFlavor, sandwiches);
+        return order;
+    }
+
+    public Order.DrinkSize getDrinkSize(){
+        System.out.println("What drink size would you like?" +
+                "\n1) Small" +
+                "\n2) Medium" +
+                "\n3) Large");
+
+        String input = "0";
+        Order.DrinkSize drinkSize = null;
+
+        while (!input.equals("1")&&!input.equals("2")&&!input.equals("3"))
+            input = scanner.nextLine();
+        switch (input) {
+            case "1":drinkSize = Order.DrinkSize.SMALL;
+                break;
+
+            case "2":drinkSize = Order.DrinkSize.MEDIUM;
+                break;
+            case "3":
+                drinkSize = Order.DrinkSize.LARGE;
+                break;
+            default:
+                System.out.println("Invalid input. Please input a valid value");
+
+        }
+        return drinkSize;
+    }
+    public Order.DrinkFlavors getDrinkFlavor(){
+        System.out.println("What drink flavor would you like?" +
+                "\n1) Cola" +
+                "\n2) Lemon-Lime" +
+                "\n3) Grape" +
+                "\n4) Strawberry" +
+                "\n5) Orange");
+
+        String input = "0";
+        Order.DrinkFlavors drinkFlavor = null;
+
+        while (!input.equals("1")&&!input.equals("2")&&!input.equals("3")
+        &&!input.equals("4")&&!input.equals("5"))
+            input = scanner.nextLine();
+        switch (input) {
+            case "1":
+                drinkFlavor = Order.DrinkFlavors.COLA;
+                break;
+            case "2":
+                drinkFlavor = Order.DrinkFlavors.LEMON_LIME;
+                break;
+            case "3":
+                drinkFlavor = Order.DrinkFlavors.GRAPE;
+                break;
+            case "4":
+                drinkFlavor = Order.DrinkFlavors.STRAWBERRY;
+                break;
+            case "5":
+                drinkFlavor = Order.DrinkFlavors.ORANGE;
+                break;
+            default:
+                System.out.println("Invalid input. Please input a valid value");
+
+        }
+        return drinkFlavor;
+    }
+    public Order.ChipFlavors getChipFlavor(){
+        System.out.println("What chip flavor would you like?" +
+                "\n1) Standard" +
+                "\n2) Spicy" +
+                "\n3) Nacho Cheese" +
+                "\n4) Lime" +
+                "\n5) BBQ");
+
+        String input = "0";
+        Order.ChipFlavors chipFlavor = null;
+
+        while (!input.equals("1")&&!input.equals("2")&&!input.equals("3")
+                &&!input.equals("4")&&!input.equals("5"))
+            input = scanner.nextLine();
+        switch (input) {
+            case "1":
+                chipFlavor = Order.ChipFlavors.STANDARD;
+                break;
+            case "2":
+                chipFlavor = Order.ChipFlavors.SPICY;
+                break;
+            case "3":
+                chipFlavor = Order.ChipFlavors.NACHO_CHEESE;
+                break;
+            case "4":
+                chipFlavor = Order.ChipFlavors.LIME;
+                break;
+            case "5":
+                chipFlavor = Order.ChipFlavors.BBQ;
+                break;
+            default:
+                System.out.println("Invalid input. Please input a valid value");
+
+        }
+        return chipFlavor;
+    }
+
 
 
     public Sandwich makeSandwich(){
@@ -89,7 +258,7 @@ public class UI {
 
         while (!input.equals("1")&&!input.equals("2")&&!input.equals("3")&&!input.equals("4"))
             input = scanner.nextLine();
-        switch (input) {
+            switch (input) {
             case "1":breadType = Sandwich.BreadType.WHITE;
                 break;
 
@@ -338,31 +507,31 @@ public class UI {
         System.out.println("---------------------------------------------");
         System.out.println("Bread ---- " + sandwich.getBreadType().readable);
         System.out.println("Size ---- " + sandwich.getBreadSize().readable);
-        System.out.println("Meats:");
+        System.out.println("Meats ----------");
         for (Sandwich.PremiumMeats meat : sandwich.getMeatToppings()){
             System.out.println(meat.readable);
         }
-        System.out.println("Extra Meats:");
+        System.out.println("Extra Meats ----------");
         for (Sandwich.PremiumMeats meat : sandwich.getExtraMeatToppings()){
             System.out.println(meat.readable);
         }
-        System.out.println("Cheeses:");
+        System.out.println("Cheeses ----------");
         for (Sandwich.PremiumCheese cheese : sandwich.getCheeseToppings()){
             System.out.println(cheese.readable);
         }
-        System.out.println("Extra Cheeses:");
+        System.out.println("Extra Cheeses ----------");
         for (Sandwich.PremiumCheese cheese : sandwich.getExtraCheeseToppings()){
             System.out.println(cheese.readable);
         }
-        System.out.println("Toppings: ");
+        System.out.println("Toppings ---------- ");
         for (Sandwich.RegularToppings topping : sandwich.getRegularToppings()){
             System.out.println(topping);
         }
-        System.out.println("Extra toppings:");
+        System.out.println("Extra toppings ----------");
         sandwich.getRegularToppings().stream().map(topping -> topping.readable).forEach(System.out::println);
-        System.out.println("Condiments: ");
+        System.out.println("Condiments ---------- ");
         sandwich.getCondiments().stream().map(condiment -> condiment.readable).forEach((System.out::println));
-        System.out.println("Sides: ");
+        System.out.println("Sides ---------- ");
         sandwich.getSides().stream().map(side -> side.readable).forEach(System.out::println);
         System.out.println("---------------------------------------------");
     }
@@ -441,17 +610,17 @@ public class UI {
 
     public ArrayList<Sandwich.PremiumMeats> fixMeats(ArrayList<Sandwich.PremiumMeats> meats,
                                                     ArrayList<Sandwich.PremiumMeats> extraMeats) {
-        for (Sandwich.PremiumMeats extraMeat : extraMeats){
-            int i = 0;
-            for (Sandwich.PremiumMeats meat : meats){
-                if (extraMeat == meat){
-                    i++;
+        for (int i = 0; i < extraMeats.size(); i++){
+            int y = 0;
+            for (Sandwich.PremiumMeats meat: meats){
+                if (extraMeats.get(i) == meat){
+                    y++;
                 }
-                if (i == 0){
-                    extraMeats.remove(extraMeat);
-                }
-
             }
+            if (y == 0){
+                extraMeats.remove(i);
+            }
+
         }
     return extraMeats;
     }
