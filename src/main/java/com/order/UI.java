@@ -608,7 +608,7 @@ public class UI {
 
 
     //functions that remove a topping from the associated extra topping list if they decide they no longer want
-    //that topping
+    //that topping in their order
     public ArrayList<Sandwich.PremiumMeats> fixMeats(ArrayList<Sandwich.PremiumMeats> meats,
                                                     ArrayList<Sandwich.PremiumMeats> extraMeats) {
         for (int i = 0; i < extraMeats.size(); i++){
