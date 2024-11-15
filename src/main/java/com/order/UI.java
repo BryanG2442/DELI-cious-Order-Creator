@@ -626,33 +626,33 @@ public class UI {
     }
     public ArrayList<Sandwich.PremiumCheese> fixCheese(ArrayList<Sandwich.PremiumCheese> cheeses,
                                                      ArrayList<Sandwich.PremiumCheese> extraCheeses) {
-        for (Sandwich.PremiumCheese extraCheese : extraCheeses){
-            int i = 0;
+        for (int i = 0; i < extraCheeses.size(); i++){
+            int y = 0;
             for (Sandwich.PremiumCheese cheese : cheeses){
-                if (extraCheese == cheese){
-                    i++;
+                if (extraCheeses.get(i) == cheese){
+                    y++;
                 }
-                if (i == 0){
-                    extraCheeses.remove(extraCheese);
-                }
-
             }
+            if (y == 0){
+                extraCheeses.remove(i);
+            }
+
         }
         return extraCheeses;
     }
     public ArrayList<Sandwich.RegularToppings> fixToppings(ArrayList<Sandwich.RegularToppings> toppings,
                                                        ArrayList<Sandwich.RegularToppings> extraToppings) {
-        for (Sandwich.RegularToppings extraTopping : extraToppings){
-            int i = 0;
-            for (Sandwich.RegularToppings topping: toppings){
-                if (extraTopping == topping){
-                    i++;
+        for (int i = 0; i < extraToppings.size(); i++){
+            int y = 0;
+            for (Sandwich.RegularToppings topping : toppings){
+                if (extraToppings.get(i) == topping){
+                    y++;
                 }
-                if (i == 0){
-                    extraToppings.remove(extraTopping);
-                }
-
             }
+            if (y == 0){
+                extraToppings.remove(i);
+            }
+
         }
         return extraToppings;
     }
