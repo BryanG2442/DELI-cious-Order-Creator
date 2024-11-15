@@ -42,10 +42,10 @@ public class UI {
         for (Sandwich sandwich : order.getSandwiches()){
             showSandwich(sandwich);
         }
-        System.out.println("Drink Size ----- " + order.getDrinkSize());
-        System.out.println("Drink Flavor ----- " + order.getDrinkFlavors());
-        System.out.println("Chips ----- " + order.getChipFlavors());
-        System.out.printf("Your total comes out to %.2f. Would you like to confirm your purchase?" +
+        System.out.println("Drink Size ----- " + order.getDrinkSize().readable);
+        System.out.println("Drink Flavor ----- " + order.getDrinkFlavors().readable);
+        System.out.println("Chips ----- " + order.getChipFlavors().readable);
+        System.out.printf("Your total comes out to $%.2f. Would you like to confirm your purchase?" +
                 "\n(Y to confirm your purchase, any other key to cancel)", order.getOrderPrice());
         String choice = scanner.nextLine();
         if (choice.equalsIgnoreCase("Y")){
@@ -525,7 +525,7 @@ public class UI {
         }
         System.out.println("Toppings ---------- ");
         for (Sandwich.RegularToppings topping : sandwich.getRegularToppings()){
-            System.out.println(topping);
+            System.out.println(topping.readable);
         }
         System.out.println("Extra toppings ----------");
         sandwich.getRegularToppings().stream().map(topping -> topping.readable).forEach(System.out::println);

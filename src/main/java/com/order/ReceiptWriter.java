@@ -37,23 +37,23 @@ public class ReceiptWriter {
     public String sandwichOutput (Sandwich sandwich){
         StringBuilder output = new StringBuilder();
         output.append("--------------------------\n");
-        output.append("Bread Size: ").append(sandwich.getBreadSize().readable).append(" --------- ").append(sandwich.getBreadSize().getBasePrice()).append("\n");
+        output.append("Bread Size: ").append(sandwich.getBreadSize().readable).append(" --------- $").append(sandwich.getBreadSize().getBasePrice()).append("\n");
         output.append("Bread Type: ").append(sandwich.getBreadType().readable).append("\n");
         output.append("Meats ----------\n");
         for (Sandwich.PremiumMeats meat : sandwich.getMeatToppings()){
-            output.append(meat.readable).append("  --------- ").append(sandwich.getBreadSize().getMeatPrice()).append("\n");
+            output.append(meat.readable).append("  --------- $").append(sandwich.getBreadSize().getMeatPrice()).append("\n");
         }
         output.append("Extra meats  ---------\n");
         for (Sandwich.PremiumMeats extraMeat : sandwich.getExtraMeatToppings()){
-            output.append(extraMeat.readable).append("---------").append(sandwich.getBreadSize().getExtraMeatPrice()).append("\n");
+            output.append(extraMeat.readable).append(" --------- $").append(sandwich.getBreadSize().getExtraMeatPrice()).append("\n");
         }
         output.append("Cheeses ----------\n");
         for (Sandwich.PremiumCheese cheese : sandwich.getCheeseToppings()){
-            output.append(cheese.readable).append("  --------- ").append(sandwich.getBreadSize().getCheesePrice()).append("\n");
+            output.append(cheese.readable).append("  --------- $").append(sandwich.getBreadSize().getCheesePrice()).append("\n");
         }
         output.append("Extra cheeses  ---------\n");
         for (Sandwich.PremiumCheese extraCheese : sandwich.getExtraCheeseToppings()){
-            output.append(extraCheese.readable).append("---------").append(sandwich.getBreadSize().getExtraCheesePrice()).append("\n");
+            output.append(extraCheese.readable).append(" --------- $").append(sandwich.getBreadSize().getExtraCheesePrice()).append("\n");
         }
         output.append("Toppings ----------\n");
         for (Sandwich.RegularToppings topping : sandwich.getRegularToppings()){
@@ -61,18 +61,18 @@ public class ReceiptWriter {
         }
         output.append("Extra toppings  ---------\n");
         for (Sandwich.RegularToppings extraTopping : sandwich.getExtraRegularToppings()){
-            output.append(extraTopping.readable).append("---------").append("\n");
+            output.append(extraTopping.readable).append("\n");
         }
         output.append("Condiments  ---------\n");
         for (Sandwich.Condiments condiments : sandwich.getCondiments()){
-            output.append(condiments.readable).append("---------").append("\n");
+            output.append(condiments.readable).append("\n");
         }
         output.append("Sides  ---------\n");
-        for (Sandwich.Sides side : sandwich.getSides()){
-            output.append(side.readable).append("---------").append("\n");
-
-        output.append("Sandwich total ------------------ ").append(sandwich.getSandwichPrice()).append("\n");
+        for (Sandwich.Sides side : sandwich.getSides()) {
+            output.append(side.readable).append("\n");
         }
+        output.append("Sandwich total ------------------ $").append(sandwich.getSandwichPrice()).append("\n");
+
 
 
 
