@@ -27,6 +27,9 @@ public class ReceiptWriter {
             bufferedWriter.write("\n\n\nOrder Total   -------------- " + order.getOrderPrice());
 
 
+
+
+
             bufferedWriter.close();
 
         } catch (Exception e) {
