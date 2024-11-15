@@ -528,7 +528,7 @@ public class UI {
             System.out.println(topping.readable);
         }
         System.out.println("Extra toppings ----------");
-        sandwich.getRegularToppings().stream().map(topping -> topping.readable).forEach(System.out::println);
+        sandwich.getExtraRegularToppings().stream().map(topping -> topping.readable).forEach(System.out::println);
         System.out.println("Condiments ---------- ");
         sandwich.getCondiments().stream().map(condiment -> condiment.readable).forEach((System.out::println));
         System.out.println("Sides ---------- ");
