@@ -98,7 +98,7 @@ public class UI {
         Order order = new Order(drinkSize, drinkFlavor, chipFlavor, sandwiches);
         return order;
     }
-
+    //functions that get the remaining variables neccessary for an order
     public Order.DrinkSize getDrinkSize(){
         System.out.println("What drink size would you like?" +
                 "\n1) Small" +
@@ -218,7 +218,7 @@ public class UI {
         return sandwich;
     }
 
-
+    //Functions that get the given variables listed for creating a sandwich
     public Sandwich.BreadSize getBreadSize(){
         System.out.println("What size of bread would you like?" +
                 "\n1) Four Inch" +
@@ -502,7 +502,7 @@ public class UI {
         System.out.println("Would you like your sandwich toasted?");
         return getBool();
     }
-
+    //Utilities used on a completed sandwich
     public void showSandwich(Sandwich sandwich){
         System.out.println("---------------------------------------------");
         System.out.println("Bread ---- " + sandwich.getBreadType().readable);
@@ -607,7 +607,8 @@ public class UI {
 
 
 
-
+    //functions that remove a topping from the associated extra topping list if they decide they no longer want
+    //that topping
     public ArrayList<Sandwich.PremiumMeats> fixMeats(ArrayList<Sandwich.PremiumMeats> meats,
                                                     ArrayList<Sandwich.PremiumMeats> extraMeats) {
         for (int i = 0; i < extraMeats.size(); i++){
