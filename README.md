@@ -31,7 +31,7 @@ public ArrayList<Sandwich.PremiumMeats> fixMeats(ArrayList<Sandwich.PremiumMeats
     }
 ```
 
-**- Spaghetti... -**
+**- Structure -**
 
 ![SandwichStructure drawio](https://github.com/user-attachments/assets/31fe5205-9c8a-44b9-87f8-06a0403e3fde)
 
